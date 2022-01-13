@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+import Frameworks from './components/Frameworks';
+import AWS from './components/AWS';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Router>
+        <div
+          style={{
+            height: '100vh',
+            position: 'relative',
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Header />
+          <Routes>
+            <Route exact path="/frameworks" element={<Frameworks />} />
+            <Route exact path="/aws" element={<AWS />} />
+          </Routes>
+        </div>
+
+        <Footer />
+      </Router>
+    </>
   );
 }
 
