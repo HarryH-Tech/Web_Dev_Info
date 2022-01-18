@@ -12,15 +12,16 @@ function Frameworks() {
   const params = { framework };
 
   const fetchData = (selectedFramework) => {
-    setData('');
     setLoading(true);
+    setData('');
+
     params.framework = selectedFramework || 'react';
     axios
       .post(process.env.REACT_APP_API_URL_GET_FRAMEWORKS, params)
       .then((res) => {
         setData(res.data);
         setLoading(false);
-        console.log(res.data);
+        console.log(data);
       });
   };
 
@@ -35,17 +36,22 @@ function Frameworks() {
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-gray-900">Frameworks</h1>
             <br />
-            <select onChange={(e) => fetchData(e.target.value.toLowerCase())}>
-              <option>React</option>
-              <option>Angular</option>
-              <option>Vue</option>
-              <option>Svelte</option>
-              <option>Node</option>
-            </select>
+            <div className="text-center">
+              <select
+                className="text-center p-1"
+                onChange={(e) => fetchData(e.target.value.toLowerCase())}
+              >
+                <option>React</option>
+                <option>Angular</option>
+                <option>Vue</option>
+                <option>Svelte</option>
+                <option>Node</option>
+              </select>
+            </div>
           </div>
         </header>
         {loading && <LoadingSpinner />}
-        {data && (
+        {data ? (
           <>
             <h2 className="text-3xl text-center font-bold underline mb-3">
               {data.framework}
@@ -56,7 +62,7 @@ function Frameworks() {
               alt={`${data.framework} icon`}
             />
 
-            <div className=" flex p-3 w-4/6 m-auto border-2 border-rose-100 rounded-lg">
+            <div className=" flex-1 p-3 w-4/6 m-auto border-2 border-rose-100 rounded-lg">
               <ul>
                 <li>
                   <span className="font-bold">Created By: </span> {data.creator}
@@ -116,6 +122,8 @@ function Frameworks() {
               </li>
             </ul>
           </>
+        ) : (
+          ''
         )}
       </div>
     </>

@@ -18,10 +18,10 @@ function AWS() {
       </h1>
       {data && (
         <>
-          <div className="text-justify m-auto text-last-center p-3 w-1/6">
+          <div className="text-justify m-auto text-last-center p-3">
             <p>{data.information}</p>
           </div>
-          <div className="w-1/2">
+          <div>
             <table className="aws-table text-center table-fixed  border-2 border-rose-100">
               <thead>
                 <tr>

@@ -1,10 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
 import '../styles/main.css';
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { height, width } = useWindowDimensions();
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height,
+    };
+  }
+
+  function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(
+      getWindowDimensions()
+    );
+
+    useEffect(() => {
+      function handleResize() {
+        setWindowDimensions([getWindowDimensions()]);
+        if (window.innerWidth > 640) {
+          setIsOpen(false);
+        }
+      }
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+  }
+
   return (
     <>
       <div>
@@ -27,7 +57,7 @@ function Header() {
                       className="text-xl duration-500 hover:bg-red-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       to="/frameworks"
                     >
-                      Frameworks
+                      Frameworks (+ Node)
                     </Link>
 
                     <Link
@@ -105,40 +135,26 @@ function Header() {
             {(ref) => (
               <div className="md:hidden" id="mobile-menu">
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                  <a
-                    href="#"
-                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  <Link
+                    className="text-center w-2/5 m-auto text-xl duration-500 hover:bg-red-300 hover:text-white px-3 block py-2 rounded-md text-sm font-medium"
+                    to="/frameworks"
                   >
-                    Dashboard
-                  </a>
+                    Frameworks (+ Node)
+                  </Link>
 
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  <Link
+                    className="text-center w-2/5 m-auto test-xl duration-500 hover:bg-ref-300 hover:bg-red-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    to="/aws"
                   >
-                    Team
-                  </a>
+                    AWS
+                  </Link>
 
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  <Link
+                    className="text-center w-2/5 m-auto text-xl duration-500 hover:bg-red-300 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
+                    to="/html_css_js"
                   >
-                    Projects
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Calendar
-                  </a>
-
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Reports
-                  </a>
+                    HTML, CSS & Javascript
+                  </Link>
                 </div>
               </div>
             )}
