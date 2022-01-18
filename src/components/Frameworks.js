@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/main.css';
+import LoadingSpinner from '../utils/LoadingSpinner';
 
 function Frameworks() {
   const [framework, setFramework] = useState('');
@@ -11,6 +12,7 @@ function Frameworks() {
   const params = { framework };
 
   const fetchData = (selectedFramework) => {
+    setData('');
     setLoading(true);
     params.framework = selectedFramework || 'react';
     axios
@@ -37,15 +39,14 @@ function Frameworks() {
               <option>React</option>
               <option>Angular</option>
               <option>Vue</option>
+              <option>Svelte</option>
               <option>Node</option>
-              <option>Meteor</option>
             </select>
           </div>
         </header>
+        {loading && <LoadingSpinner />}
         {data && (
           <>
-            {loading && <p>L</p>}
-
             <h2 className="text-3xl text-center font-bold underline mb-3">
               {data.framework}
             </h2>
