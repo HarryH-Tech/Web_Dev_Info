@@ -51,9 +51,11 @@ function Frameworks() {
   return (
     <>
       <div className="mb-10">
-        <header className="bg-white shadow flex justify-center">
-          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">Frameworks</h1>
+        <header className="bg-white shadow flex justify-center pb-3">
+          <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold text-gray-900 underline text-center">
+              Frameworks and Other Technologies
+            </h1>
             <br />
             <div className="text-center">
               <select
@@ -82,7 +84,7 @@ function Frameworks() {
               alt={`${data.framework} icon`}
             />
 
-            <div className=" flex-1 p-3 w-4/6 m-auto border-2 border-rose-100 rounded-lg">
+            <div className=" flex-1 p-3 w-4/6 m-auto border-2 border-rose-100 rounded-lg overflow-auto">
               <ul>
                 <li>
                   <span className="font-bold">Created By: </span> {data.creator}
@@ -92,7 +94,7 @@ function Frameworks() {
                   {data.initialReleaseDate}
                 </li>
                 <li>
-                  <span className="font-bold"> Github Repo: </span>
+                  <span className="font-bold "> Github Repo: </span>
                   <a
                     href={data.repo}
                     target="_blank"
@@ -137,7 +139,7 @@ function Frameworks() {
                   target="_blank"
                   className="text-blue-400 hover:text-blue-600 hover:underline"
                 >
-                  W3
+                  W3 Schools
                 </a>
               </li>
             </ul>

@@ -38,7 +38,7 @@ function Header() {
   return (
     <>
       <div>
-        <nav className="bg-blue-200">
+        <nav className="bg-blue-200 mb-5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
@@ -69,9 +69,9 @@ function Header() {
 
                     <Link
                       className="text-xl duration-500 hover:bg-red-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                      to="/html_css_js"
+                      to="/data_structures"
                     >
-                      HTML, CSS & Javascript
+                      Data Structures
                     </Link>
                   </div>
                 </div>
@@ -151,9 +151,9 @@ function Header() {
 
                   <Link
                     className="text-center w-2/5 m-auto text-xl duration-500 hover:bg-red-300 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
-                    to="/html_css_js"
+                    to="/data_structures"
                   >
-                    HTML, CSS & Javascript
+                    Data Structures
                   </Link>
                 </div>
               </div>

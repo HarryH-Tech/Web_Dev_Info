@@ -4,7 +4,7 @@ module.exports = {
     './src/components/Header.js',
     './src/components/AWS.js',
     './src/components/Home.js',
-    './src/components/HTML_CSS_JS.js',
+    './src/components/DataStructures.js',
     './src/utils/Error.js',
     './src/utils/Error.js',
     './src/components/Footer.js',

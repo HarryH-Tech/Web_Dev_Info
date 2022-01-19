@@ -22,7 +22,7 @@ function AWS() {
             <p>{data.information}</p>
           </div>
           <div>
-            <table className="aws-table text-center table-fixed  border-2 border-rose-100">
+            <table className="aws-table text-center table-fixed  border-2 border-rose-100 mb-3">
               <thead>
                 <tr>
                   <th className="px-4 py-2 text-center underline" colSpan="3">

@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Frameworks from './components/Frameworks';
 import AWS from './components/AWS';
-import HTML_CSS_JS from './components/HTML_CSS_JS';
+import DataStructures from './components/DataStructures';
 
 function App() {
   return (
@@ -21,8 +21,7 @@ function App() {
       <Router>
         <div
           style={{
-            height: '100vh',
-            position: 'relative',
+            height: '100%',
           }}
         >
           <Header />
@@ -31,11 +30,11 @@ function App() {
             <Route exact path="/frameworks" element={<Frameworks />} />
             <Route exact path="/aws" element={<AWS />} />
 
-            <Route exact path="/html_css_js" element={<HTML_CSS_JS />} />
+            <Route exact path="/data_structures" element={<DataStructures />} />
           </Routes>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </>
   );
