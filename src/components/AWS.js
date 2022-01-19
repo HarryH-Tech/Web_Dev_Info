@@ -25,7 +25,7 @@ function AWS() {
             <table className="aws-table text-center table-fixed  border-2 border-rose-100">
               <thead>
                 <tr>
-                  <th className="px-4 py-2 text-center underline" colspan="3">
+                  <th className="px-4 py-2 text-center underline" colSpan="3">
                     AWS PRODUCTS
                   </th>
                 </tr>

@@ -57,7 +57,7 @@ function Header() {
                       className="text-xl duration-500 hover:bg-red-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       to="/frameworks"
                     >
-                      Frameworks (+ Node)
+                      Frameworks + Other Technologies
                     </Link>
 
                     <Link
@@ -139,7 +139,7 @@ function Header() {
                     className="text-center w-2/5 m-auto text-xl duration-500 hover:bg-red-300 hover:text-white px-3 block py-2 rounded-md text-sm font-medium"
                     to="/frameworks"
                   >
-                    Frameworks (+ Node)
+                    Frameworks + Other Technologies
                   </Link>
 
                   <Link

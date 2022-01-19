@@ -1,5 +1,15 @@
 module.exports = {
-  content: ['./src/components/Frameworks.js', './src/components/Header.js'],
+  content: [
+    './src/components/Frameworks.js',
+    './src/components/Header.js',
+    './src/components/AWS.js',
+    './src/components/Home.js',
+    './src/components/HTML_CSS_JS.js',
+    './src/utils/Error.js',
+    './src/utils/Error.js',
+    './src/components/Footer.js',
+    './src/App.js',
+  ],
 
   presets: [],
   theme: {

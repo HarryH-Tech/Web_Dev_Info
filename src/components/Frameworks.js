@@ -1,27 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import '../styles/main.css';
 import LoadingSpinner from '../utils/LoadingSpinner';
+import Error from '../utils/Error';
 
 function Frameworks() {
-  const [framework, setFramework] = useState('');
   const [data, setData] = useState('');
 
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const params = { framework };
+  const params = { framework: '' };
 
   const fetchData = (selectedFramework) => {
     setLoading(true);
+    setErrorMessage('');
     setData('');
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     params.framework = selectedFramework || 'react';
     axios
       .post(process.env.REACT_APP_API_URL_GET_FRAMEWORKS, params)
       .then((res) => {
-        setData(res.data);
-        setLoading(false);
-        console.log(data);
+        if (res.data.statusCode === 200) {
+          setData(res.data);
+          setLoading(false);
+          console.log(data);
+        } else {
+          setLoading(false);
+          setErrorMessage(
+            `Sorry, we can't find any information about ${capitalizeFirstLetter(
+              params.framework
+            )} right now, please try again later.`
+          );
+        }
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
       });
   };
 
@@ -51,9 +70,10 @@ function Frameworks() {
           </div>
         </header>
         {loading && <LoadingSpinner />}
+        {errorMessage && <Error errorMessage={errorMessage} />}
         {data ? (
           <>
-            <h2 className="text-3xl text-center font-bold underline mb-3">
+            <h2 className="text-2xl text-center font-bold underline mb-3">
               {data.framework}
             </h2>
             <img
