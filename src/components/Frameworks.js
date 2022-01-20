@@ -66,6 +66,7 @@ function Frameworks() {
                 <option>Angular</option>
                 <option>Vue</option>
                 <option>Svelte</option>
+                <option>Typescript</option>
                 <option>Node</option>
               </select>
             </div>

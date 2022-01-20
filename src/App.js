@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Frameworks from './components/Frameworks';
 import AWS from './components/AWS';
-import DataStructures from './components/DataStructures';
+import Javascript from './components/Javascript';
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
             <Route exact path="/frameworks" element={<Frameworks />} />
             <Route exact path="/aws" element={<AWS />} />
 
-            <Route exact path="/data_structures" element={<DataStructures />} />
+            <Route exact path="/javascript" element={<Javascript />} />
           </Routes>
         </div>
 

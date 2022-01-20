@@ -2,20 +2,35 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/main.css';
 
+import LoadingSpinner from '../utils/LoadingSpinner';
+import Error from '../utils/Error';
+
 function AWS() {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API_URL_GET_AWS_INFO).then((res) => {
-      setData(res.data.body);
-      console.log(res.data.body);
-    });
+    setLoading(true);
+    axios
+      .get(process.env.REACT_APP_API_URL_GET_AWS_INFO)
+      .then((res) => {
+        if (errorMessage) setErrorMessage('');
+        setLoading(false);
+        setData(res.data.body);
+        console.log(res.data.body);
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   }, []);
   return (
     <>
       <h1 className="text-center text-3xl font-bold underline mb-4">
         Amazon Web Services
       </h1>
+      {loading && <LoadingSpinner />}
+      {errorMessage && <Error errorMessage={errorMessage} />}
       {data && (
         <>
           <div className="text-justify m-auto text-last-center p-3">
@@ -34,7 +49,16 @@ function AWS() {
                 <tr className="table-row">
                   <th>Product</th>
                   <th>Description</th>
-                  <th>Learn More</th>
+                  <th>
+                    <a
+                      href="https://www.amazon.science/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-400 hover:text-blue-600 hover:underline"
+                    >
+                      Learn More
+                    </a>
+                  </th>
                 </tr>
 
                 {data.products &&
@@ -51,30 +75,38 @@ function AWS() {
                               product.learn_more.map((item) => {
                                 return (
                                   <div>
-                                    <p>
-                                      {item.wiki && (
-                                        <a
-                                          className="text-blue-400 hover:text-blue-600 hover:underline"
-                                          href={item.wiki}
-                                          target="_blank"
-                                          rel="noreferrer"
-                                        >
-                                          Wikipedia
-                                        </a>
-                                      )}
-                                    </p>
-                                    <p>
-                                      {item.docs && (
-                                        <a
-                                          className="text-blue-400 hover:text-blue-600 hover:underline"
-                                          href={item.docs}
-                                          target="_blank"
-                                          rel="noreferrer"
-                                        >
-                                          Documentation
-                                        </a>
-                                      )}
-                                    </p>
+                                    {item.wiki && (
+                                      <a
+                                        className="text-blue-400 hover:text-blue-600 hover:underline"
+                                        href={item.wiki}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Wikipedia
+                                      </a>
+                                    )}
+                                    <br />
+                                    {item.docs && (
+                                      <a
+                                        className="text-blue-400 hover:text-blue-600 hover:underline"
+                                        href={item.docs}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Documentation
+                                      </a>
+                                    )}
+                                    <br />
+                                    {item.docs && (
+                                      <a
+                                        className="text-blue-400 hover:text-blue-600 hover:underline"
+                                        href={item.youtube_tutorial}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Youtube Tutorial
+                                      </a>
+                                    )}
                                   </div>
                                 );
                               })}

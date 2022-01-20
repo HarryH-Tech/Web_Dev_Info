@@ -69,9 +69,9 @@ function Header() {
 
                     <Link
                       className="text-xl duration-500 hover:bg-red-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                      to="/data_structures"
+                      to="/javascript"
                     >
-                      Data Structures
+                      Javascript
                     </Link>
                   </div>
                 </div>
@@ -151,9 +151,9 @@ function Header() {
 
                   <Link
                     className="text-center w-2/5 m-auto text-xl duration-500 hover:bg-red-300 hover:text-white block px-3 py-2 rounded-md text-sm font-medium"
-                    to="/data_structures"
+                    to="/javascript"
                   >
-                    Data Structures
+                    Javascript
                   </Link>
                 </div>
               </div>
