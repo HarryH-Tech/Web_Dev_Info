@@ -7,17 +7,3 @@
     text-align-last: center;
   }
 }
-
-.aws-table {
-  width: 80%;
-  margin: auto;
-  margin-bottom: 100px;
-}
-
-.table-row {
-  border-bottom: 2px solid rgb(255 228 230);
-}
-
-.aws-product-description {
-  width: 60%;
-}

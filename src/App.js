@@ -29,7 +29,6 @@ function App() {
             <Route path="/*" element={<Home />} />
             <Route exact path="/frameworks" element={<Frameworks />} />
             <Route exact path="/aws" element={<AWS />} />
-
             <Route exact path="/javascript" element={<Javascript />} />
           </Routes>
         </div>

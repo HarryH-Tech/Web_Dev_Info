@@ -31,13 +31,13 @@ function AWS() {
       </h1>
       {loading && <LoadingSpinner />}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      {data && (
+      {data ? (
         <>
-          <div className="text-justify m-auto text-last-center p-3">
+          <div className="text-justify w-4/5 m-auto text-last-center mb-3">
             <p>{data.information}</p>
           </div>
           <div>
-            <table className="aws-table text-center table-fixed  border-2 border-rose-100 mb-3">
+            <table className="text-center table-auto  border-2 border-rose-100 mb-3  m-auto mb-32  w-10/12">
               <thead>
                 <tr>
                   <th className="px-4 py-2 text-center underline" colSpan="3">
@@ -46,7 +46,7 @@ function AWS() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="table-row">
+                <tr>
                   <th>Product</th>
                   <th>Description</th>
                   <th>
@@ -65,51 +65,50 @@ function AWS() {
                   data.products.map((product) => {
                     return (
                       <>
-                        <tr className="table-row">
-                          <td className="font-bold p-3">{product.name}</td>
-                          <td className="aws-product-description text-justify text-last-center">
+                        <tr className=" border-2 border-rose-100">
+                          <td className="p-2 font-bold w-6">{product.name}</td>
+                          <td className="p-2 text-justify text-last-center">
                             {product.description}
                           </td>
-                          <td>
-                            {product.learn_more &&
-                              product.learn_more.map((item) => {
-                                return (
-                                  <div>
-                                    {item.wiki && (
-                                      <a
-                                        className="text-blue-400 hover:text-blue-600 hover:underline"
-                                        href={item.wiki}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                      >
-                                        Wikipedia
-                                      </a>
-                                    )}
-                                    <br />
-                                    {item.docs && (
-                                      <a
-                                        className="text-blue-400 hover:text-blue-600 hover:underline"
-                                        href={item.docs}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                      >
-                                        Documentation
-                                      </a>
-                                    )}
-                                    <br />
-                                    {item.docs && (
-                                      <a
-                                        className="text-blue-400 hover:text-blue-600 hover:underline"
-                                        href={item.youtube_tutorial}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                      >
-                                        Youtube Tutorial
-                                      </a>
-                                    )}
-                                  </div>
-                                );
-                              })}
+                          <td className="p-2">
+                            {product.learn_more.map((item) => {
+                              return (
+                                <div>
+                                  {item.wiki && (
+                                    <a
+                                      className="text-blue-400 hover:text-blue-600 hover:underline"
+                                      href={item.wiki}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      Wikipedia
+                                    </a>
+                                  )}
+                                  <br />
+                                  {item.docs && (
+                                    <a
+                                      className="text-blue-400 hover:text-blue-600 hover:underline"
+                                      href={item.docs}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      Documentation
+                                    </a>
+                                  )}
+                                  <br />
+                                  {item.docs && (
+                                    <a
+                                      className="text-blue-400 hover:text-blue-600 hover:underline"
+                                      href={item.youtube_tutorial}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      Youtube Tutorial
+                                    </a>
+                                  )}
+                                </div>
+                              );
+                            })}
                           </td>
                         </tr>
                       </>
@@ -119,6 +118,12 @@ function AWS() {
             </table>
           </div>
         </>
+      ) : (
+        <Error
+          errorMessage={
+            "Sorry, we're unable to display this data right now, please try again later."
+          }
+        />
       )}
     </>
   );
