@@ -16,6 +16,7 @@ export default function Home() {
         setData(res.data.body);
         setLoading(false);
         setErrorMessage('');
+        console.log(res.data.body);
       } else {
         setErrorMessage(
           'Sorry, there was an error loading this page ☹ \n Please try again later.'
@@ -176,7 +177,7 @@ export default function Home() {
 
               <ul className="text-center">
                 {/* Websites */}
-                {data.learn_more.podcasts.map((website) => {
+                {data.learn_more.websites.map((website) => {
                   return (
                     <>
                       <br />
@@ -238,6 +239,27 @@ export default function Home() {
           </div>
         </>
       )}
+
+      <div className="flex-1 m-auto w-11/12 border-rose-100  border-2 p-3 rounded-2xl">
+        <h3 className="underline font-bold text-center">Miscellaneous</h3>
+        <div>
+          {data &&
+            data.miscellaneous.map((item) => (
+              <div>
+                {' '}
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cursor-pointer text-blue-400 hover:text-blue-600 hover:underline"
+                >
+                  {item.name}
+                </a>
+                <br />
+              </div>
+            ))}
+        </div>
+      </div>
 
       {errorMessage && <Error errorMessage={errorMessage} />}
     </>

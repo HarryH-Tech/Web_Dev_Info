@@ -10,7 +10,7 @@ function AWS() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
+  function fetchData() {
     setLoading(true);
     axios
       .get(process.env.REACT_APP_API_URL_GET_AWS_INFO)
@@ -18,12 +18,18 @@ function AWS() {
         if (errorMessage) setErrorMessage('');
         setLoading(false);
         setData(res.data.body);
-        console.log(res.data.body);
       })
-      .catch((error) => {
-        setErrorMessage(error.message);
+      .catch(() => {
+        setErrorMessage(
+          "Sorry, we're unable to display this data right now, please try again later."
+        );
       });
+  }
+
+  useEffect(() => {
+    fetchData();
   }, []);
+
   return (
     <>
       <h1 className="text-center text-3xl font-bold underline mb-4">
@@ -31,7 +37,7 @@ function AWS() {
       </h1>
       {loading && <LoadingSpinner />}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      {data ? (
+      {data && (
         <>
           <div className="text-justify w-4/5 m-auto text-last-center mb-3">
             <p>{data.information}</p>
@@ -61,69 +67,68 @@ function AWS() {
                   </th>
                 </tr>
 
-                {data.products &&
-                  data.products.map((product) => {
-                    return (
-                      <>
-                        <tr className=" border-2 border-rose-100">
-                          <td className="p-2 font-bold w-6">{product.name}</td>
-                          <td className="p-2 text-justify text-last-center">
-                            {product.description}
-                          </td>
-                          <td className="p-2">
-                            {product.learn_more.map((item) => {
-                              return (
-                                <div>
-                                  {item.wiki && (
-                                    <a
-                                      className="text-blue-400 hover:text-blue-600 hover:underline"
-                                      href={item.wiki}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      Wikipedia
-                                    </a>
-                                  )}
-                                  <br />
-                                  {item.docs && (
-                                    <a
-                                      className="text-blue-400 hover:text-blue-600 hover:underline"
-                                      href={item.docs}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      Documentation
-                                    </a>
-                                  )}
-                                  <br />
-                                  {item.docs && (
-                                    <a
-                                      className="text-blue-400 hover:text-blue-600 hover:underline"
-                                      href={item.youtube_tutorial}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      Youtube Tutorial
-                                    </a>
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
+                {data.products
+                  ? data.products.map((product) => {
+                      return (
+                        <>
+                          <tr className=" border-2 border-rose-100">
+                            <td className="p-2 font-bold w-6">
+                              {product.name}
+                            </td>
+                            <td className="p-2 text-justify text-last-center">
+                              {product.description}
+                            </td>
+                            <td className="p-2">
+                              {product.learn_more.map((item) => {
+                                return (
+                                  <div>
+                                    {item.wiki && (
+                                      <a
+                                        className="text-blue-400 hover:text-blue-600 hover:underline"
+                                        href={item.wiki}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Wikipedia
+                                      </a>
+                                    )}
+                                    <br />
+                                    {item.docs && (
+                                      <a
+                                        className="text-blue-400 hover:text-blue-600 hover:underline"
+                                        href={item.docs}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Documentation
+                                      </a>
+                                    )}
+                                    <br />
+                                    {item.docs && (
+                                      <a
+                                        className="text-blue-400 hover:text-blue-600 hover:underline"
+                                        href={item.youtube_tutorial}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Youtube Tutorial
+                                      </a>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })
+                  : setErrorMessage(
+                      'Sorry, this data is not available at the moment. Please try again later.'
+                    )}
               </tbody>
             </table>
           </div>
         </>
-      ) : (
-        <Error
-          errorMessage={
-            "Sorry, we're unable to display this data right now, please try again later."
-          }
-        />
       )}
     </>
   );

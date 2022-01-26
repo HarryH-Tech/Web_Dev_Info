@@ -14,17 +14,17 @@ export default function Javascript() {
     axios
       .get(process.env.REACT_APP_API_URL_GET_JAVASCRIPT_INFO)
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setData(res.data);
       })
-      .catch((error) => {
-        setErrorMessage(error.message);
+      .catch(() => {
+        setErrorMessage(
+          "Sorry, we're unable to display this data right now, please try again later."
+        );
       });
   }
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_API_URL_GET_JAVASCRIPT_INFO);
     fetchData();
   }, []);
 

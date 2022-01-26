@@ -29,7 +29,6 @@ function Frameworks() {
         if (res.data.statusCode === 200) {
           setData(res.data);
           setLoading(false);
-          console.log(data);
         } else {
           setLoading(false);
           setErrorMessage(
