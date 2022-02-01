@@ -6,7 +6,6 @@ module.exports = {
     './src/components/Home.js',
     './src/components/Javascript.js',
     './src/utils/Error.js',
-    './src/utils/Error.js',
     './src/components/Footer.js',
     './src/App.js',
   ],
@@ -14,6 +13,7 @@ module.exports = {
   presets: [],
   theme: {
     screens: {
+      tiny: '400px',
       sm: '640px',
       md: '768px',
       lg: '1024px',

@@ -7,3 +7,7 @@
     text-align-last: center;
   }
 }
+
+body {
+  overflow-x: hidden;
+}

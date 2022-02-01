@@ -16,7 +16,6 @@ export default function Home() {
         setData(res.data.body);
         setLoading(false);
         setErrorMessage('');
-        console.log(res.data.body);
       } else {
         setErrorMessage(
           'Sorry, there was an error loading this page ☹ \n Please try again later.'
@@ -41,8 +40,8 @@ export default function Home() {
             {data.information}
           </p>
           <br />
-          <div className="flex m-4 p-3 space-x-4">
-            <div className="flex-1 w-30 border-rose-100 border-2 p-3 rounded-2xl">
+          <div className="tiny:flex p-3 space-x-4 m-auto m-4">
+            <div className="flex-1 border-rose-100 border-2 p-3 rounded-2xl mb-2">
               <h3 className="underline font-bold text-center">
                 Reddit Threads
               </h3>
@@ -108,7 +107,7 @@ export default function Home() {
                 })}
               </ul>
             </div>
-            <div className=" flex-1 w-30 border-rose-100  border-2 p-3 rounded-2xl ">
+            <div className="flex-1 border-rose-100  border-2 p-3 rounded-2xl mb-2">
               <h3 className="underline font-bold text-center">Podcasts</h3>
               <ul className="text-center">
                 {/* PODCASTS */}
@@ -172,7 +171,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className=" flex-1 w-30 border-rose-100  border-2 p-3 rounded-2xl ">
+            <div className="flex-1 border-rose-100  border-2 p-3 rounded-2xl mb-2">
               <h3 className="underline font-bold text-center">Websites</h3>
 
               <ul className="text-center">
@@ -237,29 +236,94 @@ export default function Home() {
               </ul>
             </div>
           </div>
+          {data && (
+            <div className="flex-1 m-auto w-11/12 border-rose-100  border-2 p-3 rounded-2xl mb-24 tiny:text-sm overflow-auto">
+              <h3 className="underline font-bold text-center">
+                Miscellaneous Tech Links
+              </h3>
+              <div className="flex">
+                <div className="p-2 flex-1">
+                  <ul>
+                    {data.miscellaneous
+                      .slice(0, Math.ceil(data.miscellaneous.length / 3))
+                      .map((item) => (
+                        <>
+                          <div>
+                            <li>
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="cursor-pointer text-blue-400 hover:text-blue-600 hover:underline"
+                              >
+                                {item.name}
+                              </a>
+                            </li>
+                            <br />
+                          </div>
+                        </>
+                      ))}
+                  </ul>
+                </div>
+                <div className="p-2 flex-1">
+                  <ul>
+                    {data &&
+                      data.miscellaneous
+                        .slice(
+                          Math.ceil(data.miscellaneous.length / 3),
+                          Math.ceil(data.miscellaneous.length / 3) * 2
+                        )
+                        .map((item) => (
+                          <>
+                            <div>
+                              <li>
+                                <a
+                                  href={item.url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="cursor-pointer text-blue-400 hover:text-blue-600 hover:underline"
+                                >
+                                  {item.name}
+                                </a>
+                              </li>
+                              <br />
+                            </div>
+                          </>
+                        ))}
+                  </ul>
+                </div>
+                <div className="p-2 flex-1">
+                  <ul>
+                    {data &&
+                      data.miscellaneous
+                        .slice(
+                          Math.ceil((data.miscellaneous.length / 3) * 2),
+                          Math.ceil(data.miscellaneous.length)
+                        )
+                        .map((item) => (
+                          <>
+                            <div>
+                              <li>
+                                <a
+                                  href={item.url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="cursor-pointer text-blue-400 hover:text-blue-600 hover:underline"
+                                >
+                                  {item.name}
+                                </a>
+                              </li>
+                              <br />
+                            </div>
+                          </>
+                        ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
-
-      <div className="flex-1 m-auto w-11/12 border-rose-100  border-2 p-3 rounded-2xl">
-        <h3 className="underline font-bold text-center">Miscellaneous</h3>
-        <div>
-          {data &&
-            data.miscellaneous.map((item) => (
-              <div>
-                {' '}
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="cursor-pointer text-blue-400 hover:text-blue-600 hover:underline"
-                >
-                  {item.name}
-                </a>
-                <br />
-              </div>
-            ))}
-        </div>
-      </div>
 
       {errorMessage && <Error errorMessage={errorMessage} />}
     </>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../styles/main.css';
 
 import LoadingSpinner from '../utils/LoadingSpinner';
 import Error from '../utils/Error';
@@ -16,6 +17,7 @@ export default function Javascript() {
       .then((res) => {
         setLoading(false);
         setData(res.data);
+        console.log(res.data);
       })
       .catch(() => {
         setErrorMessage(
@@ -31,6 +33,7 @@ export default function Javascript() {
   return (
     <>
       {loading && <LoadingSpinner />}
+      {errorMessage && <Error errorMessage={errorMessage} />}
       {data && (
         <>
           <h1 className="text-center font-bold text-3xl underline mb-1">
@@ -40,8 +43,8 @@ export default function Javascript() {
             {data.body.data_types_information}
           </div>
 
-          <div>
-            <table className="text-center table-auto  border-2 border-rose-100 mb-3  m-auto mb-32  w-10/12">
+          <div className="overflow-auto">
+            <table className="text-center table-auto  border-2 border-rose-100 mb-3  m-auto mb-32 w-10/12">
               <thead>
                 <tr>
                   <th className="px-4 py-2 text-center underline" colSpan="3">
@@ -55,32 +58,28 @@ export default function Javascript() {
                   <th>Description</th>
                   <th>Learn More</th>
                 </tr>
-                {data.body.data_structures_and_types ? (
-                  data.body.data_structures_and_types.map((dataType) => (
-                    <tr className=" border-2 border-rose-100">
-                      <td className="p-1 font-bold">{dataType.name}</td>
-                      <td className="p-2 text-justify text-last-center">
-                        {dataType.information}
-                      </td>
-                      <td className="p-1">
-                        <a
-                          className="text-blue-400 hover:text-blue-600 hover:underline"
-                          href={dataType.mdn}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Mozilla Web Docs
-                        </a>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <Error
-                    errorMessage={
-                      "Sorry, we're unable to display this data right now, please try again later."
-                    }
-                  />
-                )}
+                {data.body.data_structures_and_types
+                  ? data.body.data_structures_and_types.map((dataType) => (
+                      <tr className="border-2 border-rose-100">
+                        <td className="p-1 font-bold">{dataType.name}</td>
+                        <td className="p-2 text-justify text-last-center">
+                          {dataType.information}
+                        </td>
+                        <td className="p-2">
+                          <a
+                            className="text-blue-400 hover:text-blue-600 hover:underline"
+                            href={dataType.mdn}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Mozilla Web Docs
+                          </a>
+                        </td>
+                      </tr>
+                    ))
+                  : setErrorMessage(
+                      'Sorry, this data is not available at the moment. Please try again later.'
+                    )}
               </tbody>
             </table>
           </div>

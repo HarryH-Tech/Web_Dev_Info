@@ -15,6 +15,8 @@ import Frameworks from './components/Frameworks';
 import AWS from './components/AWS';
 import Javascript from './components/Javascript';
 
+import './styles/main.css';
+
 function App() {
   return (
     <>
