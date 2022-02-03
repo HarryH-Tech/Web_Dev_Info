@@ -17,7 +17,6 @@ export default function Javascript() {
       .then((res) => {
         setLoading(false);
         setData(res.data);
-        console.log(res.data);
       })
       .catch(() => {
         setErrorMessage(
@@ -58,28 +57,25 @@ export default function Javascript() {
                   <th>Description</th>
                   <th>Learn More</th>
                 </tr>
-                {data.body.data_structures_and_types
-                  ? data.body.data_structures_and_types.map((dataType) => (
-                      <tr className="border-2 border-rose-100">
-                        <td className="p-1 font-bold">{dataType.name}</td>
-                        <td className="p-2 text-justify text-last-center">
-                          {dataType.information}
-                        </td>
-                        <td className="p-2">
-                          <a
-                            className="text-blue-400 hover:text-blue-600 hover:underline"
-                            href={dataType.mdn}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Mozilla Web Docs
-                          </a>
-                        </td>
-                      </tr>
-                    ))
-                  : setErrorMessage(
-                      'Sorry, this data is not available at the moment. Please try again later.'
-                    )}
+                {data.body.data_structures_and_types &&
+                  data.body.data_structures_and_types.map((dataType) => (
+                    <tr className="border-2 border-rose-100">
+                      <td className="p-1 font-bold">{dataType.name}</td>
+                      <td className="p-2 text-justify text-last-center">
+                        {dataType.information}
+                      </td>
+                      <td className="p-2">
+                        <a
+                          className="text-blue-400 hover:text-blue-600 hover:underline"
+                          href={dataType.mdn}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Mozilla Web Docs
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

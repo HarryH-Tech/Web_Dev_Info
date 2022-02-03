@@ -7,18 +7,16 @@ import Error from '../utils/Error';
 
 function AWS() {
   const [data, setData] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   function fetchData() {
     setLoading(true);
     axios
       .get(process.env.REACT_APP_API_URL_GET_AWS_INFO)
       .then((res) => {
-        if (errorMessage) setErrorMessage('');
         setLoading(false);
         setData(res.data.body);
-        console.log(res.data.body);
       })
       .catch(() => {
         setErrorMessage(
@@ -35,7 +33,7 @@ function AWS() {
     <>
       {loading && <LoadingSpinner />}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      {data ? (
+      {data && (
         <>
           <h1 className="text-center text-3xl font-bold underline mb-4">
             Amazon Web Services
@@ -121,10 +119,6 @@ function AWS() {
             </table>
           </div>
         </>
-      ) : (
-        setErrorMessage(
-          'Sorry, this data is not available at the moment. Please try again later.'
-        )
       )}
     </>
   );

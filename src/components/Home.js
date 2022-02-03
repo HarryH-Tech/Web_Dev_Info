@@ -248,7 +248,7 @@ export default function Home() {
                       .slice(0, Math.ceil(data.miscellaneous.length / 3))
                       .map((item) => (
                         <>
-                          <div>
+                          <div className="text-center">
                             <li>
                               <a
                                 href={item.url}
@@ -275,7 +275,7 @@ export default function Home() {
                         )
                         .map((item) => (
                           <>
-                            <div>
+                            <div className="text-center">
                               <li>
                                 <a
                                   href={item.url}
@@ -302,7 +302,7 @@ export default function Home() {
                         )
                         .map((item) => (
                           <>
-                            <div>
+                            <div className="text-center">
                               <li>
                                 <a
                                   href={item.url}
